@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "GreenWatch",
+  "name": "GreenWatch - 永續環保評分平台",
   "icons": [
     {
       "src": "favicon.ico",
