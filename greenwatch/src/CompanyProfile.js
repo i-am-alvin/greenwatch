@@ -105,28 +105,28 @@ const CompanyProfile = () => {
         {/* ESG 評分卡片 */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           {[
-            { title: '環境評分', score: esgScores.environmental, icon: TreePine, color: 'emerald' },
-            { title: '社會評分', score: esgScores.social, icon: Users, color: 'blue' },
-            { title: '治理評分', score: esgScores.governance, icon: Scale, color: 'purple' }
+            { title: '環境評分', score: esgScores.environmental, icon: TreePine, iconColor: 'text-emerald-600', bgColor: 'bg-emerald-500', decorationColor: 'bg-emerald-50' },
+            { title: '社會評分', score: esgScores.social, icon: Users, iconColor: 'text-blue-600', bgColor: 'bg-blue-500', decorationColor: 'bg-blue-50' },
+            { title: '治理評分', score: esgScores.governance, icon: Scale, iconColor: 'text-purple-600', bgColor: 'bg-purple-500', decorationColor: 'bg-purple-50' }
           ].map((item, index) => (
             <Card key={index} className="relative overflow-hidden">
               <CardContent className="p-6">
                 <div className="relative z-10">
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-2">
-                      <item.icon className={`h-5 w-5 text-${item.color}-600`} />
+                      <item.icon className={`h-5 w-5 ${item.iconColor}`} />
                       <span className="font-medium">{item.title}</span>
                     </div>
                     <span className="text-2xl font-bold">{item.score}</span>
                   </div>
                   <div className="w-full bg-gray-100 rounded-full h-2">
                     <div
-                      className={`h-2 rounded-full bg-gradient-to-r from-${item.color}-500 to-${item.color}-600`}
+                      className={`h-2 rounded-full ${item.bgColor}`}
                       style={{ width: `${item.score}%` }}
                     />
                   </div>
                 </div>
-                <div className={`absolute top-0 right-0 w-32 h-32 bg-${item.color}-50 rounded-full -mr-16 -mt-16 opacity-50`} />
+                <div className={`absolute top-0 right-0 w-32 h-32 ${item.decorationColor} rounded-full -mr-16 -mt-16 opacity-50`} />
               </CardContent>
             </Card>
           ))}
