@@ -1,13 +1,31 @@
 import React from 'react';
-import { 
-  Building2, MapPin, Users, TreePine, Scale, Briefcase,
-  AlertTriangle, FileText, DollarSign, ChevronRight,
-  Search, Bell, Activity, Eye, Home
+import {
+  Building2,
+  MapPin,
+  Users,
+  TreePine,
+  Scale,
+  Briefcase,
+  AlertTriangle,
+  FileText,
+  DollarSign,
+  ChevronRight,
+  Search,
+  Bell,
+  Activity,
+  Eye,
+  Home,
 } from 'lucide-react';
 import { Card, CardContent } from './components/ui/card';
-import { 
-  AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, 
-  ResponsiveContainer, Line
+import {
+  AreaChart,
+  Area,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  Line,
 } from 'recharts';
 
 const CompanyProfile = () => {
@@ -105,9 +123,30 @@ const CompanyProfile = () => {
         {/* ESG 評分卡片 */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           {[
-            { title: '環境評分', score: esgScores.environmental, icon: TreePine, iconColor: 'text-emerald-600', bgColor: 'bg-emerald-500', decorationColor: 'bg-emerald-50' },
-            { title: '社會評分', score: esgScores.social, icon: Users, iconColor: 'text-blue-600', bgColor: 'bg-blue-500', decorationColor: 'bg-blue-50' },
-            { title: '治理評分', score: esgScores.governance, icon: Scale, iconColor: 'text-purple-600', bgColor: 'bg-purple-500', decorationColor: 'bg-purple-50' }
+            {
+              title: '環境評分',
+              score: esgScores.environmental,
+              icon: TreePine,
+              iconColor: 'text-emerald-600',
+              bgColor: 'bg-emerald-500',
+              decorationColor: 'bg-emerald-50',
+            },
+            {
+              title: '社會評分',
+              score: esgScores.social,
+              icon: Users,
+              iconColor: 'text-blue-600',
+              bgColor: 'bg-blue-500',
+              decorationColor: 'bg-blue-50',
+            },
+            {
+              title: '治理評分',
+              score: esgScores.governance,
+              icon: Scale,
+              iconColor: 'text-purple-600',
+              bgColor: 'bg-purple-500',
+              decorationColor: 'bg-purple-50',
+            },
           ].map((item, index) => (
             <Card key={index} className="relative overflow-hidden">
               <CardContent className="p-6">
@@ -126,7 +165,9 @@ const CompanyProfile = () => {
                     />
                   </div>
                 </div>
-                <div className={`absolute top-0 right-0 w-32 h-32 ${item.decorationColor} rounded-full -mr-16 -mt-16 opacity-50`} />
+                <div
+                  className={`absolute top-0 right-0 w-32 h-32 ${item.decorationColor} rounded-full -mr-16 -mt-16 opacity-50`}
+                />
               </CardContent>
             </Card>
           ))}
@@ -151,8 +192,8 @@ const CompanyProfile = () => {
                 <AreaChart data={carbonEmissionData}>
                   <defs>
                     <linearGradient id="colorAmount" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#059669" stopOpacity={0.1}/>
-                      <stop offset="95%" stopColor="#059669" stopOpacity={0}/>
+                      <stop offset="5%" stopColor="#059669" stopOpacity={0.1} />
+                      <stop offset="95%" stopColor="#059669" stopOpacity={0} />
                     </linearGradient>
                   </defs>
                   <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
@@ -194,17 +235,22 @@ const CompanyProfile = () => {
               </div>
               <div className="space-y-4">
                 {violations.map((violation, index) => (
-                  <div key={index} className="p-4 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors">
+                  <div
+                    key={index}
+                    className="p-4 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors"
+                  >
                     <div className="flex justify-between items-start mb-2">
                       <div>
                         <span className="font-medium text-red-600">{violation.type}</span>
                         <p className="text-sm text-gray-600 mt-1">{violation.description}</p>
                       </div>
-                      <span className={`px-3 py-1 rounded-full text-sm ${
-                        violation.status === "已改善" 
-                          ? "bg-green-100 text-green-800" 
-                          : "bg-yellow-100 text-yellow-800"
-                      }`}>
+                      <span
+                        className={`px-3 py-1 rounded-full text-sm ${
+                          violation.status === '已改善'
+                            ? 'bg-green-100 text-green-800'
+                            : 'bg-yellow-100 text-yellow-800'
+                        }`}
+                      >
                         {violation.status}
                       </span>
                     </div>
@@ -229,21 +275,33 @@ const CompanyProfile = () => {
               </div>
               <div className="space-y-4">
                 {newsDigest.map((news, index) => (
-                  <div key={index} className="p-4 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors">
+                  <div
+                    key={index}
+                    className="p-4 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors"
+                  >
                     <div className="flex justify-between items-start mb-2">
                       <h3 className="font-medium">{news.title}</h3>
-                      <span className={`px-3 py-1 rounded-full text-sm ${
-                        news.sentiment === "positive"
-                          ? "bg-emerald-100 text-emerald-800"
-                          : "bg-red-100 text-red-800"
-                      }`}>
+                      <span
+                        className={`px-3 py-1 rounded-full text-sm ${
+                          news.sentiment === 'positive'
+                            ? 'bg-emerald-100 text-emerald-800'
+                            : 'bg-red-100 text-red-800'
+                        }`}
+                      >
                         {news.source}
                       </span>
                     </div>
                     <p className="text-sm text-gray-600 mt-1">{news.summary}</p>
                     <div className="flex justify-between text-sm text-gray-500 mt-2">
                       <span>{news.date}</span>
-                      <a href={news.link} target="_blank" rel="noopener noreferrer" className="text-emerald-600 hover:underline">閱讀更多</a>
+                      <a
+                        href={news.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-emerald-600 hover:underline"
+                      >
+                        閱讀更多
+                      </a>
                     </div>
                   </div>
                 ))}
@@ -262,7 +320,7 @@ const companyInfo = {
   engName: 'Green Tech Inc.',
   headquarters: '台北市, 台灣',
   employees: '250',
-  revenue: 'NT$ 1億'
+  revenue: 'NT$ 1億',
 };
 
 const esgScores = {
@@ -271,7 +329,7 @@ const esgScores = {
   improvement: '5%',
   environmental: 75,
   social: 80,
-  governance: 90
+  governance: 90,
 };
 
 const carbonEmissionData = [
@@ -283,13 +341,39 @@ const carbonEmissionData = [
 ];
 
 const violations = [
-  { type: '環保法違規', description: '未依規定回報碳排放數據', date: '2024-01-15', fine: 50000, status: '已改善' },
-  { type: '資源浪費', description: '未適當處理廢棄物', date: '2024-02-20', fine: 30000, status: '未改善' },
+  {
+    type: '環保法違規',
+    description: '未依規定回報碳排放數據',
+    date: '2024-01-15',
+    fine: 50000,
+    status: '已改善',
+  },
+  {
+    type: '資源浪費',
+    description: '未適當處理廢棄物',
+    date: '2024-02-20',
+    fine: 30000,
+    status: '未改善',
+  },
 ];
 
 const newsDigest = [
-  { title: '綠色科技公司獲得國際環保獎', summary: '因其在可再生能源方面的努力而受到表彰。', date: '2024-03-05', source: '綠色新聞', sentiment: 'positive', link: 'https://example.com/news1' },
-  { title: 'ESG報告指出綠色科技公司需改善社會責任', summary: '報告中提到公司在社會責任方面的得分有所下降。', date: '2024-04-10', source: '商業日報', sentiment: 'negative', link: 'https://example.com/news2' },
+  {
+    title: '綠色科技公司獲得國際環保獎',
+    summary: '因其在可再生能源方面的努力而受到表彰。',
+    date: '2024-03-05',
+    source: '綠色新聞',
+    sentiment: 'positive',
+    link: 'https://example.com/news1',
+  },
+  {
+    title: 'ESG報告指出綠色科技公司需改善社會責任',
+    summary: '報告中提到公司在社會責任方面的得分有所下降。',
+    date: '2024-04-10',
+    source: '商業日報',
+    sentiment: 'negative',
+    link: 'https://example.com/news2',
+  },
 ];
 
 // 將元件導出
