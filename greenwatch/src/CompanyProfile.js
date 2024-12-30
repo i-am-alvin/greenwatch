@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Building2,
   MapPin,
@@ -28,7 +28,151 @@ import {
   Line,
 } from 'recharts';
 
+// Add mock data for different companies
+const mockData = {
+  綠色科技公司: {
+    name: '綠色科技公司',
+    engName: 'Green Tech Inc.',
+    headquarters: '台北市, 台灣',
+    employees: '250',
+    revenue: 'NT$ 1億',
+    esgScores: {
+      overall: '85',
+      environmental: 75,
+      social: 80,
+      governance: 90,
+    },
+    carbonEmissionData: [
+      { year: '2019', amount: 150, target: 120 },
+      { year: '2020', amount: 140, target: 115 },
+      { year: '2021', amount: 130, target: 110 },
+      { year: '2022', amount: 120, target: 100 },
+      { year: '2023', amount: 100, target: 90 },
+    ],
+    violations: [
+      {
+        type: '環保法違規',
+        description: '未依規定回報碳排放數據',
+        date: '2024-01-15',
+        fine: 50000,
+        status: '已改善',
+      },
+      {
+        type: '資源浪費',
+        description: '未適當處理廢棄物',
+        date: '2024-02-20',
+        fine: 30000,
+        status: '未改善',
+      },
+    ],
+    newsDigest: [
+      {
+        title: '綠色科技公司獲得國際環保獎',
+        summary: '因其在可再生能源方面的努力而受到表彰。',
+        date: '2024-03-05',
+        source: '綠色新聞',
+        sentiment: 'positive',
+        link: 'https://example.com/news1',
+      },
+      {
+        title: 'ESG報告指出綠色科技公司需改善社會責任',
+        summary: '報告中提到公司在社會責任方面的得分有所下降。',
+        date: '2024-04-10',
+        source: '商業日報',
+        sentiment: 'negative',
+        link: 'https://example.com/news2',
+      },
+    ],
+  },
+  聯發科: {
+    name: '聯發科',
+    engName: 'MediaTek Inc.',
+    headquarters: '新竹市, 台灣',
+    employees: '5000',
+    revenue: 'NT$ 5億',
+    esgScores: {
+      overall: '90',
+      environmental: 85,
+      social: 88,
+      governance: 92,
+    },
+    carbonEmissionData: [
+      { year: '2019', amount: 160, target: 130 },
+      { year: '2020', amount: 150, target: 125 },
+      { year: '2021', amount: 140, target: 120 },
+      { year: '2022', amount: 130, target: 110 },
+      { year: '2023', amount: 110, target: 100 },
+    ],
+    violations: [
+      {
+        type: '環保法違規',
+        description: '未依規定回報碳排放數據',
+        date: '2024-01-15',
+        fine: 60000,
+        status: '已改善',
+      },
+    ],
+    newsDigest: [
+      {
+        title: '聯發科在5G技術上取得突破',
+        summary: '公司宣布其最新的5G芯片組已經量產。',
+        date: '2024-03-10',
+        source: '科技日報',
+        sentiment: 'positive',
+        link: 'https://example.com/news3',
+      },
+    ],
+  },
+  台積電: {
+    name: '台積電',
+    engName: 'TSMC',
+    headquarters: '台南市, 台灣',
+    employees: '10000',
+    revenue: 'NT$ 10億',
+    esgScores: {
+      overall: '95',
+      environmental: 90,
+      social: 92,
+      governance: 98,
+    },
+    carbonEmissionData: [
+      { year: '2019', amount: 170, target: 140 },
+      { year: '2020', amount: 160, target: 135 },
+      { year: '2021', amount: 150, target: 130 },
+      { year: '2022', amount: 140, target: 120 },
+      { year: '2023', amount: 120, target: 110 },
+    ],
+    violations: [
+      {
+        type: '資源浪費',
+        description: '未適當處理廢棄物',
+        date: '2024-02-20',
+        fine: 40000,
+        status: '未改善',
+      },
+    ],
+    newsDigest: [
+      {
+        title: '台積電宣布新製程技術',
+        summary: '新技術將大幅提升芯片性能和能效。',
+        date: '2024-04-15',
+        source: '半導體新聞',
+        sentiment: 'positive',
+        link: 'https://example.com/news4',
+      },
+    ],
+  },
+};
+
 const CompanyProfile = () => {
+  const [selectedCompany, setSelectedCompany] = useState('綠色科技公司');
+  const companyInfo = mockData[selectedCompany];
+
+  // Check if companyInfo is undefined
+  if (!companyInfo) {
+    return <div>公司信息加載中...</div>;
+  }
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* 導航欄 */}
@@ -44,9 +188,29 @@ const CompanyProfile = () => {
               </div>
               <div className="hidden md:flex items-center gap-6">
                 {['儀表板', '企業列表', 'ESG評分', '新聞中心'].map((item, index) => (
-                  <button key={index} className="text-gray-600 hover:text-emerald-600 font-medium">
-                    {item}
-                  </button>
+                  <div key={index} className="relative group">
+                    <button
+                      className="text-gray-600 hover:text-emerald-600 font-medium"
+                      onClick={() => item === '企業列表' && setSelectedCompany('綠色科技公司')}
+                    >
+                      {item}
+                    </button>
+                    {item === '企業列表' && (
+                      <div className="absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg hidden group-hover:block group-focus-within:block">
+                        <ul className="py-1">
+                          {['綠色科技公司', '聯發科', '台積電'].map((company, index) => (
+                            <li
+                              key={index}
+                              className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                              onClick={() => setSelectedCompany(company)}
+                            >
+                              {company}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
                 ))}
               </div>
             </div>
@@ -113,7 +277,7 @@ const CompanyProfile = () => {
               </div>
               <div className="text-right">
                 <span className="inline-block px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full text-sm font-medium">
-                  ESG 評分: {esgScores.overall}
+                  ESG 評分: {companyInfo.esgScores.overall}
                 </span>
               </div>
             </div>
@@ -125,7 +289,7 @@ const CompanyProfile = () => {
           {[
             {
               title: '環境評分',
-              score: esgScores.environmental,
+              score: companyInfo.esgScores.environmental,
               icon: TreePine,
               iconColor: 'text-emerald-600',
               bgColor: 'bg-emerald-500',
@@ -133,7 +297,7 @@ const CompanyProfile = () => {
             },
             {
               title: '社會評分',
-              score: esgScores.social,
+              score: companyInfo.esgScores.social,
               icon: Users,
               iconColor: 'text-blue-600',
               bgColor: 'bg-blue-500',
@@ -141,7 +305,7 @@ const CompanyProfile = () => {
             },
             {
               title: '治理評分',
-              score: esgScores.governance,
+              score: companyInfo.esgScores.governance,
               icon: Scale,
               iconColor: 'text-purple-600',
               bgColor: 'bg-purple-500',
@@ -189,7 +353,7 @@ const CompanyProfile = () => {
             </div>
             <div className="h-[300px]">
               <ResponsiveContainer width="100%" height="100%">
-                <AreaChart data={carbonEmissionData}>
+                <AreaChart data={companyInfo.carbonEmissionData}>
                   <defs>
                     <linearGradient id="colorAmount" x1="0" y1="0" x2="0" y2="1">
                       <stop offset="5%" stopColor="#059669" stopOpacity={0.1} />
@@ -234,7 +398,7 @@ const CompanyProfile = () => {
                 <button className="text-sm text-gray-500 hover:text-gray-700">查看全部</button>
               </div>
               <div className="space-y-4">
-                {violations.map((violation, index) => (
+                {companyInfo.violations.map((violation, index) => (
                   <div
                     key={index}
                     className="p-4 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors"
@@ -274,7 +438,7 @@ const CompanyProfile = () => {
                 <button className="text-sm text-gray-500 hover:text-gray-700">查看全部</button>
               </div>
               <div className="space-y-4">
-                {newsDigest.map((news, index) => (
+                {companyInfo.newsDigest.map((news, index) => (
                   <div
                     key={index}
                     className="p-4 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors"
@@ -313,68 +477,6 @@ const CompanyProfile = () => {
     </div>
   );
 };
-
-// 模擬數據
-const companyInfo = {
-  name: '綠色科技公司',
-  engName: 'Green Tech Inc.',
-  headquarters: '台北市, 台灣',
-  employees: '250',
-  revenue: 'NT$ 1億',
-};
-
-const esgScores = {
-  overall: '85',
-  ranking: '第2名',
-  improvement: '5%',
-  environmental: 75,
-  social: 80,
-  governance: 90,
-};
-
-const carbonEmissionData = [
-  { year: '2019', amount: 150, target: 120 },
-  { year: '2020', amount: 140, target: 115 },
-  { year: '2021', amount: 130, target: 110 },
-  { year: '2022', amount: 120, target: 100 },
-  { year: '2023', amount: 100, target: 90 },
-];
-
-const violations = [
-  {
-    type: '環保法違規',
-    description: '未依規定回報碳排放數據',
-    date: '2024-01-15',
-    fine: 50000,
-    status: '已改善',
-  },
-  {
-    type: '資源浪費',
-    description: '未適當處理廢棄物',
-    date: '2024-02-20',
-    fine: 30000,
-    status: '未改善',
-  },
-];
-
-const newsDigest = [
-  {
-    title: '綠色科技公司獲得國際環保獎',
-    summary: '因其在可再生能源方面的努力而受到表彰。',
-    date: '2024-03-05',
-    source: '綠色新聞',
-    sentiment: 'positive',
-    link: 'https://example.com/news1',
-  },
-  {
-    title: 'ESG報告指出綠色科技公司需改善社會責任',
-    summary: '報告中提到公司在社會責任方面的得分有所下降。',
-    date: '2024-04-10',
-    source: '商業日報',
-    sentiment: 'negative',
-    link: 'https://example.com/news2',
-  },
-];
 
 // 將元件導出
 export default CompanyProfile;
