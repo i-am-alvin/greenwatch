@@ -1,4 +1,15 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-npx lint-staged 
+# 暫存未 stage 的更改
+git stash -q --keep-index
+
+# 運行檢查
+npx lint-staged
+RESULT=$?
+
+# 恢復暫存的更改
+git stash pop -q
+
+# 返回結果
+exit $RESULT 
