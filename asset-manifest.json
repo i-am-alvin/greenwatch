@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/GreenWatchAI/static/css/main.48ff9983.css",
+    "main.js": "/GreenWatchAI/static/js/main.8760ebf9.js",
+    "static/js/453.96920c0b.chunk.js": "/GreenWatchAI/static/js/453.96920c0b.chunk.js",
+    "index.html": "/GreenWatchAI/index.html",
+    "main.48ff9983.css.map": "/GreenWatchAI/static/css/main.48ff9983.css.map",
+    "main.8760ebf9.js.map": "/GreenWatchAI/static/js/main.8760ebf9.js.map",
+    "453.96920c0b.chunk.js.map": "/GreenWatchAI/static/js/453.96920c0b.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.48ff9983.css",
+    "static/js/main.8760ebf9.js"
+  ]
+}
