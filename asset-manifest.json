@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/greenwatch/static/css/main.48ff9983.css",
-    "main.js": "/greenwatch/static/js/main.33295236.js",
+    "main.css": "/greenwatch/static/css/main.7bcdc983.css",
+    "main.js": "/greenwatch/static/js/main.6aeaf006.js",
     "static/js/453.96920c0b.chunk.js": "/greenwatch/static/js/453.96920c0b.chunk.js",
     "index.html": "/greenwatch/index.html",
-    "main.48ff9983.css.map": "/greenwatch/static/css/main.48ff9983.css.map",
-    "main.33295236.js.map": "/greenwatch/static/js/main.33295236.js.map",
+    "main.7bcdc983.css.map": "/greenwatch/static/css/main.7bcdc983.css.map",
+    "main.6aeaf006.js.map": "/greenwatch/static/js/main.6aeaf006.js.map",
     "453.96920c0b.chunk.js.map": "/greenwatch/static/js/453.96920c0b.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.48ff9983.css",
-    "static/js/main.33295236.js"
+    "static/css/main.7bcdc983.css",
+    "static/js/main.6aeaf006.js"
   ]
 }
